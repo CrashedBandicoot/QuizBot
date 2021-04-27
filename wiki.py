@@ -1,10 +1,7 @@
 import wikipediaapi
-import spacy
-nlp = spacy.load("en_core_web_sm")
-
 
 # section summary
-def sect_summ (sections, level=0):
+def sect_summ(sections, level=0):
     for s in sections:
         print("%s: %s - %s" % ("*" * (level + 1), s.title, s.text[0:40]))
         print_sections(s.sections, level + 1)
@@ -26,4 +23,6 @@ def extract_page(title):
 
 
 #print title
-print(extract_page('Python_(programming_language)')[0])
+print(extract_page('Python_(programming_language)')[1])
+
+#extract HTML text summary
