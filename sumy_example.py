@@ -1,10 +1,6 @@
 from __future__ import absolute_import
 from __future__ import division, print_function, unicode_literals
 
-
-
-
-
 from sumy.parsers.html import HtmlParser
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -28,5 +24,4 @@ if __name__ == "__main__":
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        print("=============")
         print(sentence)
