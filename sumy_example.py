@@ -28,4 +28,5 @@ if __name__ == "__main__":
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
+        print("=============")
         print(sentence)
