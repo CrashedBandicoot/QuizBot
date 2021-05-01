@@ -1,5 +1,6 @@
-import spacy
+#from __future__ import unicode_literals, print_functions
 import random
+import spacy
 nlp = spacy.load("en_core_web_sm")
 
 
@@ -17,14 +18,25 @@ def noun_chunks(str):
 # randomly cloze out a chunk in sentence
 def cloze_sent(str):
     chunks = noun_chunks(str)
+    if len(chunks) == 0: return "ERR: No English noun in sentence"
     pos = random.randint(0, len(chunks)-1)
     cloze_chunk = chunks[pos]
     return str.replace(cloze_chunk, "___")
 
-test = "Apple is looking at buying U.K. startup for $1 billion dollars in New York!"
-print(cloze_sent(test))
+# return array of sentences from a text
+def sents_break(str):
+    nlp.add_pipe('sentencizer') 
+    doc = nlp(str)
+    sentences = [sent.text.strip() for sent in doc.sents]
+    return sentences
 
-#print(noun_chunks(test))
+# generate one quiz question
+def get_quiz(sents):
+    if len(sents) == 0: return "No quiz question can be generated."
+    pos = random.randint(0, len(sents)-1) 
+    return cloze_sent(sents[pos]),sents[pos]
+
+#test = "Apple is looking at buying U.K. startup for $1 billion dollars in New York!"
 
 # takes in string. return array of strings of entities
 def ent_clumps(str):
@@ -58,7 +70,6 @@ def ent_clumps(str):
 
     print(clumps)
     return
-
 
 # cloze the first entity
 def cloze_first_entity(doc):
