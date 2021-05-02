@@ -10,16 +10,11 @@ from sumy.utils import get_stop_words
 
 from cloze_sentence import cloze_sent,sents_break,get_quiz
 
-
-
-
 def get_html_summ(url):
     LANGUAGE = "english"
     SENTENCES_COUNT = 10
     if __name__ == "__main__":
         parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
-        # or for plain text files
-        # parser = PlaintextParser.from_file("document.txt", Tokenizer(LANGUAGE))
         stemmer = Stemmer(LANGUAGE)
 
         summarizer = Summarizer(stemmer)
@@ -28,12 +23,8 @@ def get_html_summ(url):
         txt = ""
         for sentence in summarizer(parser.document, SENTENCES_COUNT):
             txt += sentence._text
-            #TODO convert sentence to string
-            #print(dir(sentence))
         return txt
 
-#url = "https://realpython.com/beautiful-soup-web-scraper-python/"
-#print(get_html_summ(url))
 
 def summ_from_inp():
     inp = input("Enter your link: ")
